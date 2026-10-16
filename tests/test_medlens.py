@@ -3,11 +3,11 @@ RxNav and openFDA on the day of the build. Run: .venv/bin/python -m pytest -q"""
 import os
 import re
 
-os.environ["MEDSCAN_OFFLINE"] = "1"
+os.environ["MEDLENS_OFFLINE"] = "1"
 
 import pytest
 
-from medscan import advice, check, pipeline, rx, vision
+from medlens import advice, check, pipeline, rx, vision
 
 
 def items(*names):
@@ -156,7 +156,7 @@ def test_ocr_skips_pharmacy_boilerplate_before_any_lookup(line):
 # --- cabinet ----------------------------------------------------------------
 from datetime import date, datetime, timezone
 
-from medscan import cabinet
+from medlens import cabinet
 
 
 def test_parse_times_accepts_common_forms_and_reports_the_rest():

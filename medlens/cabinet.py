@@ -131,14 +131,14 @@ def to_ics(cab: dict, start: date | None = None, now: datetime | None = None) ->
     medicine per dose time. Times are 'floating': they follow the phone's own timezone."""
     start = start or date.today()
     stamp = (now or datetime.now(timezone.utc)).strftime("%Y%m%dT%H%M%SZ")
-    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//MedScan//Reminders//EN",
-             "CALSCALE:GREGORIAN", "X-WR-CALNAME:MedScan reminders"]
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//MedLens//Reminders//EN",
+             "CALSCALE:GREGORIAN", "X-WR-CALNAME:MedLens reminders"]
     for med, t in due(cab):
-        lines += ["BEGIN:VEVENT", f"UID:{med['id']}-{t.replace(':', '')}@medscan",
+        lines += ["BEGIN:VEVENT", f"UID:{med['id']}-{t.replace(':', '')}@medlens",
                   f"DTSTAMP:{stamp}", f"DTSTART:{start:%Y%m%d}T{t.replace(':', '')}00",
                   "DURATION:PT15M", "RRULE:FREQ=DAILY",
                   f"SUMMARY:{_esc('Take ' + med['label'])}",
-                  "DESCRIPTION:" + _esc("Reminder from MedScan. Follow the directions on your "
+                  "DESCRIPTION:" + _esc("Reminder from MedLens. Follow the directions on your "
                                         "label and from your prescriber."),
                   "BEGIN:VALARM", "ACTION:DISPLAY", "TRIGGER:PT0M",
                   f"DESCRIPTION:{_esc('Take ' + med['label'])}", "END:VALARM", "END:VEVENT"]

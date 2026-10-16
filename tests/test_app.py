@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-os.environ["MEDSCAN_OFFLINE"] = "1"
+os.environ["MEDLENS_OFFLINE"] = "1"
 
 from streamlit.testing.v1 import AppTest
 

@@ -18,10 +18,10 @@
 </style></head>
 <body><div id="ui"></div>
 <script>
-// Keeps the MedScan cabinet in this browser's localStorage and (opt-in) fires dose-time
+// Keeps the MedLens cabinet in this browser's localStorage and (opt-in) fires dose-time
 // notifications. Nothing leaves the device: Python hands data over to be saved, and gets it
 // back once when the page loads.
-const KEY = "medscan.cabinet.v1", NKEY = "medscan.notify.v1", FKEY = "medscan.fired.v1";
+const KEY = "medlens.cabinet.v1", NKEY = "medlens.notify.v1", FKEY = "medlens.fired.v1";
 let cfg = {meds: [], taken: []}, lastVersion = -1, announced = false, ticking = false, lastHeight = -1;
 
 function send(type, extra) {
@@ -70,8 +70,8 @@ function status() {
     return ["Notifications are blocked. Allow them in your browser's site settings, then try again.", true];
   if (refused && !notifyOn())
     return ["Permission wasn't granted. Tap the switch again and choose Allow, or enable notifications for this site in your browser settings.", true];
-  if (notifyOn()) return ["On. You'll get a notification at each dose time while MedScan is open in a tab.", false];
-  return ["Off. Only works while MedScan is open in a tab. For alerts when it is closed, use the calendar reminders.", false];
+  if (notifyOn()) return ["On. You'll get a notification at each dose time while MedLens is open in a tab.", false];
+  return ["Off. Only works while MedLens is open in a tab. For alerts when it is closed, use the calendar reminders.", false];
 }
 function renderUI() {
   const on = notifyOn(), s = status();
@@ -89,7 +89,7 @@ function renderUI() {
     renderUI();
   };
   const t = document.getElementById("test");
-  if (t) t.onclick = () => show("MedScan test", "Dose-time notifications are on.");
+  if (t) t.onclick = () => show("MedLens test", "Dose-time notifications are on.");
   // Measure the content itself. (documentElement.scrollHeight includes the frame's own height,
   // so feeding it back makes the frame grow on every render.)
   const h = Math.ceil(document.getElementById("ui").getBoundingClientRect().height) + 4;

@@ -1,4 +1,4 @@
-"""MedScan: Streamlit app.   .venv/bin/streamlit run streamlit_app.py"""
+"""MedLens: Streamlit app.   .venv/bin/streamlit run streamlit_app.py"""
 import html
 import itertools
 import os
@@ -6,11 +6,11 @@ from datetime import date
 
 import streamlit as st
 
-from medscan import advice, cabinet, pipeline, vision
-from medscan.store_browser import notify_switch, sync
-from medscan.theme import CSS
+from medlens import advice, cabinet, pipeline, vision
+from medlens.store_browser import notify_switch, sync
+from medlens.theme import CSS
 
-st.set_page_config(page_title="MedScan", layout="centered")
+st.set_page_config(page_title="MedLens", layout="centered")
 try:  # Streamlit Cloud keeps the free vision key in Secrets
     if "GEMINI_API_KEY" in st.secrets:
         os.environ.setdefault("GEMINI_API_KEY", st.secrets["GEMINI_API_KEY"])
@@ -87,7 +87,7 @@ def resolved(raw, conf):
 def nav():
     n = len(ss.cabinet["meds"])
     in_cabinet = ss.stage == "cabinet" or (ss.stage == "results" and ss.back == "cabinet")
-    st.markdown('<div class="wordmark"><i></i>MedScan</div>', unsafe_allow_html=True)
+    st.markdown('<div class="wordmark"><i></i>MedLens</div>', unsafe_allow_html=True)
     a, b = st.columns(2)
     if a.button("Scan", icon=":material/photo_camera:", use_container_width=True,
                 type="secondary" if in_cabinet else "primary", key="nav_scan"):
@@ -102,7 +102,7 @@ def nav():
 def scan():
     nav()
     st.markdown('<div class="title">Check your medicines in one photo</div>'
-                '<p class="lead">Photograph your pill bottles. MedScan lists them and flags '
+                '<p class="lead">Photograph your pill bottles. MedLens lists them and flags '
                 'combinations that shouldn\'t be taken together.</p>', unsafe_allow_html=True)
     st.markdown('<div class="card note sub">Hackathon demo, not medical advice. Please use '
                 'prop labels, not real prescription labels.</div>', unsafe_allow_html=True)
@@ -278,7 +278,7 @@ def confirm():
 
 # ───────────────────────────── Results ─────────────────────────────
 def summary_text(r):
-    lines = ["MedScan summary (hackathon demo; information only, not medical advice)", "",
+    lines = ["MedLens summary (hackathon demo; information only, not medical advice)", "",
              "Medicines listed: " + ", ".join(i["label"] for i in r["items"]), ""]
     shown = [c for c in r["cards"] if not c["minor"]]
     for c in shown:
@@ -360,7 +360,7 @@ def results():
     if ss.back == "confirm" and any(i["ingredients"] for i in r["items"]):
         st.button("Save to my cabinet", icon=":material/add_circle:", type="primary",
                   use_container_width=True, on_click=save_scanned)
-    st.download_button("Share with my pharmacist", summary_text(r), "medscan_summary.txt",
+    st.download_button("Share with my pharmacist", summary_text(r), "medlens_summary.txt",
                        use_container_width=True, icon=":material/ios_share:")
     if st.button("Scan again", use_container_width=True):
         ss.meds = []
@@ -486,10 +486,10 @@ def cabinet_screen():
             go("results", back="cabinet")
         has_times = any(m["times"] for m in cab["meds"])
         st.download_button("Add daily reminders to my calendar", cabinet.to_ics(cab, ss.today),
-                           "medscan_reminders.ics", "text/calendar", use_container_width=True,
+                           "medlens_reminders.ics", "text/calendar", use_container_width=True,
                            icon=":material/notifications:", disabled=not has_times)
         st.markdown('<div class="fine">The reminder file repeats every day and works in Apple, '
-                    'Google and Outlook calendars, so your phone alerts you even when MedScan is '
+                    'Google and Outlook calendars, so your phone alerts you even when MedLens is '
                     'closed. Open the file, or tap it after downloading, to add it.</div>',
                     unsafe_allow_html=True)
 
@@ -507,7 +507,7 @@ def cabinet_screen():
         else:
             st.button("Clear cabinet", icon=":material/delete:", key="clear_ask",
                       use_container_width=True, on_click=_ask_clear)
-    st.markdown('<div class="fine">MedScan is a hackathon demo. Reminders help you remember; they '
+    st.markdown('<div class="fine">MedLens is a hackathon demo. Reminders help you remember; they '
                 'are not a substitute for your prescriber\'s directions.</div>',
                 unsafe_allow_html=True)
 

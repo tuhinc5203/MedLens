@@ -5,7 +5,7 @@ from pathlib import Path
 import streamlit.components.v1 as components
 
 _component = components.declare_component(
-    "medscan_cabinet_store", path=str(Path(__file__).resolve().parent.parent / "components" / "cabinet_store"))
+    "medlens_cabinet_store", path=str(Path(__file__).resolve().parent.parent / "components" / "cabinet_store"))
 
 
 def sync(write: dict | None, config: dict | None = None, today: str = ""):

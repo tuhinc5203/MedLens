@@ -9,8 +9,7 @@ drug label it came from, so nothing is a black box.
 > MedLens began as a hackathon idea. It was built in a day and never presented. It is a
 > proof of concept, **not medical advice**. Use prop labels, not real prescription labels.
 
-[![Tests](https://github.com/tuhinc5203/MedLens/actions/workflows/tests.yml/badge.svg)](https://github.com/tuhinc5203/MedLens/actions/workflows/tests.yml)
-· [See screenshots](screenshots/README.md) · [MIT License](LICENSE)
+[See screenshots](screenshots/README.md) · [MIT License](LICENSE)
 
 ## Why it exists
 

@@ -1,13 +1,13 @@
 # MedLens screenshots
 
 ## Front page
-![Front page](MedLens_frontpage.png)
+<img src="MedLens_frontpage.png" alt="Front page" width="50%">
 
 ## Bottles scanned
-![Bottles scanned](MedLens_bottles_scanned.png)
+<img src="MedLens_bottles_scanned.png" alt="Bottles scanned" width="50%">
 
 ## Interactions found
-![Interactions found](MedLens_interactions.png)
+<img src="MedLens_interactions.png" alt="Interactions found" width="50%">
 
 ## My Cabinet
-![My Cabinet](MedLens_cabinet.png)
+<img src="MedLens_cabinet.png" alt="My Cabinet" width="50%">
